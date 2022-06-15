@@ -2,8 +2,8 @@ import React from "react";
 
 import { ReactComponent as Navigate } from "../../common/ui/assets/images/navigate.svg";
 import { ReactComponent as Location } from "../../common/ui/assets/images/location.svg";
-import { ReactComponent as SunnyCloudRain } from "../../common/ui/assets/images/SunnyCloudRain.svg";
-import Cloud from "../../common/ui/assets/images/cloud.png";
+import { ReactComponent as SunnyCloudRain } from "../../common/ui/assets/images/weather-set/SunnyCloudRain.svg";
+import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 
 import styles from "./Summary.module.scss";
 
