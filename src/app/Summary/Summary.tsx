@@ -7,9 +7,13 @@ import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 
 import styles from "./Summary.module.scss";
 import Searching from "./Searching";
+import useGetCurrentPosition from "../../common/utils/helpers/useGetCurrentPosition";
 
 const Summary = () => {
   const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
+
+  // const pos = useGetCurrentPosition();
+  // const getCurrentPos = () => console.log(pos);
 
   return (
     <div className={styles.summary}>
