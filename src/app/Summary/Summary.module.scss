@@ -4,9 +4,10 @@
   position: relative;
   background-color: colors.$primary;
   padding: 40px 46px 50px;
+  height: 100%;
   overflow: hidden;
 
-  .searchBar {
+  .headings {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -33,6 +34,7 @@
       background-color: colors.$bg-gray;
       fill: colors.$gray;
       border-radius: 50%;
+      cursor: pointer;
     }
   }
 
@@ -125,6 +127,19 @@
       top: 40%;
       left: 85%;
       transform: rotateY(180deg);
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .summary {
+    padding: 18px 11px;
+
+    .decoration {
+      &.decoration-1,
+      &.decoration-2 {
+        left: -25%;
+      }
     }
   }
 }

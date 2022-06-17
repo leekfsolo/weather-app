@@ -1,0 +1,121 @@
+@use "../../../common/ui/assets/colors";
+
+.searching {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: colors.$primary;
+  padding: 20px 45px;
+
+  .close {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 45px;
+
+    svg {
+      fill: colors.$gray;
+      width: 32px;
+      cursor: pointer;
+    }
+  }
+
+  .searchBar {
+    width: 100%;
+    margin-bottom: 50px;
+
+    form {
+      width: 100%;
+      max-height: 48px;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      input {
+        padding: 15px 15px 15px 45px;
+        width: 70%;
+        outline: none;
+        border: 1px solid colors.$gray;
+        height: 45px;
+        background-color: transparent;
+        color: colors.$gray;
+
+        &::placeholder {
+          color: colors.$border-gray;
+        }
+      }
+
+      button {
+        width: 25%;
+        height: 45px;
+        outline: none;
+        border: none;
+        background-color: colors.$blue;
+        color: colors.$gray;
+        cursor: pointer;
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+
+      svg {
+        position: absolute;
+        width: 24px;
+        fill: colors.$border-gray;
+        left: 10px;
+        top: -2px;
+      }
+    }
+  }
+
+  .locations {
+    color: colors.$gray;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 30px 0;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        border: 1px solid transparent;
+        cursor: pointer;
+
+        &:hover {
+          border-color: colors.$border-gray;
+
+          .chevronRight {
+            visibility: visible;
+          }
+        }
+
+        .chevronRight {
+          visibility: hidden;
+
+          svg {
+            fill: colors.$border-gray;
+            width: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .searching {
+    padding: 15px 12px;
+  }
+}

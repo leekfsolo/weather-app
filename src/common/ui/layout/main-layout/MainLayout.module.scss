@@ -1,5 +1,12 @@
 .main-layout {
   display: grid;
   grid-template-columns: 450px auto;
-  height: 100vh;
+  height: 100%;
+}
+
+@media (max-width: 376px) {
+  .main-layout {
+    display: flex;
+    flex-direction: column;
+  }
 }

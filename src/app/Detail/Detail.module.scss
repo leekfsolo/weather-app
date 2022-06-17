@@ -3,6 +3,7 @@
 .detail {
   background-color: colors.$secondary;
   padding: 40px 125px 25px;
+  height: 100%;
 
   .temperature {
     display: flex;
@@ -38,6 +39,7 @@
 
   .weather-card {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
@@ -54,6 +56,27 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 32px;
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .detail {
+    padding: 24px;
+
+    .temperature {
+      display: none;
+    }
+
+    .weather-card {
+      gap: 32px 26px;
+      padding: 25px;
+    }
+
+    .weather-highlights {
+      .highlights {
+        grid-template-columns: 1fr;
+      }
     }
   }
 }

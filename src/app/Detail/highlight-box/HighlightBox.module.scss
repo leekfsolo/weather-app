@@ -86,3 +86,9 @@
     }
   }
 }
+
+@media (max-width: 376px) {
+  .box {
+    min-width: auto;
+  }
+}

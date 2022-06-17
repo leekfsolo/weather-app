@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { ReactComponent as Navigate } from "../../common/ui/assets/images/navigate.svg";
 import { ReactComponent as Location } from "../../common/ui/assets/images/location.svg";
@@ -6,12 +6,18 @@ import { ReactComponent as SunnyCloudRain } from "../../common/ui/assets/images/
 import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 
 import styles from "./Summary.module.scss";
+import Searching from "./Searching";
 
 const Summary = () => {
+  const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
+
   return (
     <div className={styles.summary}>
-      <div className={styles.searchBar}>
-        <button>Search for places</button>
+      {isShowSearching && <Searching setIsShowSearching={setIsShowSearching} />}
+      <div className={styles.headings}>
+        <button onClick={() => setIsShowSearching(true)}>
+          Search for places
+        </button>
         <Navigate />
       </div>
       <div className={styles.content}>
