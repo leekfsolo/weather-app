@@ -8,9 +8,13 @@ import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 import styles from "./Summary.module.scss";
 import Searching from "./Searching";
 import useGetCurrentPosition from "../../common/utils/helpers/useGetCurrentPosition";
+import { useSelector } from "react-redux";
+import { weatherState } from "../../weatherSlice/weatherSlice";
 
 const Summary = () => {
   const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
+  const unit = useSelector((state: any) => state.weather.unit);
+  const currentCity = useSelector((state: any) => state.weather.city);
 
   // const pos = useGetCurrentPosition();
   // const getCurrentPos = () => console.log(pos);
@@ -27,7 +31,7 @@ const Summary = () => {
       <div className={styles.content}>
         <SunnyCloudRain />
         <h1>
-          15<span>℃</span>
+          15<span>{unit}</span>
         </h1>
         <h2>Shower</h2>
         <div className={styles.info}>
@@ -38,7 +42,7 @@ const Summary = () => {
           </div>
           <p>
             <Location />
-            Helsinki
+            {currentCity}
           </p>
         </div>
       </div>

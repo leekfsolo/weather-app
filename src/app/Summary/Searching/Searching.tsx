@@ -6,6 +6,8 @@ import { ReactComponent as ChevronRight } from "../../../common/ui/assets/images
 
 import styles from "./Searching.module.scss";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { changeCity } from "../../../weatherSlice/weatherSlice";
 
 interface Props {
   setIsShowSearching: (isShowSearching: boolean) => void;
@@ -17,6 +19,7 @@ const Searching: FC<Props> = (props: Props) => {
   const [cities, setCities] = useState<Array<string>>([]);
   const [filteredValue, setFilteredValue] = useState<string>("");
   const locationInputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
 
   const searchLocationHandler = (e: any) => {
     e.preventDefault();
@@ -55,8 +58,6 @@ const Searching: FC<Props> = (props: Props) => {
     }
   }, [filteredValue]);
 
-  console.log(cities);
-
   return (
     <div className={styles.searching}>
       <div className={styles.close} onClick={() => setIsShowSearching(false)}>
@@ -77,7 +78,13 @@ const Searching: FC<Props> = (props: Props) => {
       <div className={styles.locations}>
         <ul>
           {cities.map((city, idx) => (
-            <li key={idx}>
+            <li
+              key={idx}
+              onClick={() => {
+                dispatch(changeCity(city));
+                setIsShowSearching(false);
+              }}
+            >
               <span>{city}</span>
               <span className={styles.chevronRight}>
                 <ChevronRight />

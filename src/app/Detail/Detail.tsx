@@ -9,6 +9,8 @@ import styles from "./Detail.module.scss";
 import { WeatherDay } from "../model";
 import WeatherCard from "./weather-card";
 import HighlightBox from "./highlight-box";
+import { useDispatch } from "react-redux";
+import { celsius, fahrenheit } from "../../weatherSlice/weatherSlice";
 
 const Detail = () => {
   const [nextFiveDays, setNextFiveDays] = useState<Array<WeatherDay>>([
@@ -43,12 +45,17 @@ const Detail = () => {
       max_temp: 16,
     },
   ]);
+  const dispatch = useDispatch();
 
   return (
     <section className={styles.detail}>
       <div className={styles.temperature}>
-        <p className={styles.celsius}>℃</p>
-        <p className={styles.fahrenheit}>℉</p>
+        <p className={styles.celsius} onClick={() => dispatch(celsius())}>
+          ℃
+        </p>
+        <p className={styles.fahrenheit} onClick={() => dispatch(fahrenheit())}>
+          ℉
+        </p>
       </div>
       <div className={styles["weather-card"]}>
         {nextFiveDays.map((day, idx) => (
