@@ -2,7 +2,6 @@ import React, { FC, useState } from "react";
 
 import { ReactComponent as Navigate } from "../../common/ui/assets/images/navigate.svg";
 import { ReactComponent as Location } from "../../common/ui/assets/images/location.svg";
-import { ReactComponent as SunnyCloudRain } from "../../common/ui/assets/images/weather-set/SunnyCloudRain.svg";
 import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 
 import styles from "./Summary.module.scss";
@@ -11,6 +10,7 @@ import useGetCurrentPosition from "../../common/utils/helpers/useGetCurrentPosit
 import { useSelector } from "react-redux";
 import { weatherState } from "../../weatherSlice/weatherSlice";
 import { WeatherDay } from "../model";
+import { getDateFormat } from "../../common/utils/helpers/getDateFormat";
 
 interface Props {
   data: WeatherDay;
@@ -18,8 +18,10 @@ interface Props {
 
 const Summary: FC<Props> = (props: Props) => {
   const { data } = props;
-  const { icon, temps, status, date } = data;
+  const { icon, temps, status, date: dateStr } = data;
   const temp = temps.reduce((tempA, tempB) => tempA + tempB, 0) / temps.length;
+  const { day, date, month } = getDateFormat(dateStr);
+
   const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
   const unit = useSelector(
     (state: { weather: weatherState }) => state.weather.unit
@@ -51,7 +53,7 @@ const Summary: FC<Props> = (props: Props) => {
           <div className={styles.date}>
             <span>Today</span>
             <span>&bull;</span>
-            <span>{date}</span>
+            <span>{`${day}, ${date} ${month}`}</span>
           </div>
           <p>
             <Location />

@@ -8,7 +8,7 @@
   background-color: colors.$primary;
   color: colors.$gray;
   min-width: 300px;
-  padding: 22px 50px;
+  padding: 18px 50px;
 
   h4,
   p {
@@ -22,10 +22,10 @@
   }
 
   .data {
-    font-size: 32px;
+    font-size: 24px;
 
     span {
-      font-size: 48px;
+      font-size: 36px;
       font-weight: 700;
     }
   }
@@ -90,5 +90,6 @@
 @media (max-width: 376px) {
   .box {
     min-width: auto;
+    padding: 22px 30px;
   }
 }

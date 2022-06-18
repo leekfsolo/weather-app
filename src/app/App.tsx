@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import Loading from "../common/ui/layout/content-layout/loading";
 import MainLayout from "../common/ui/layout/main-layout";
 import { weatherState } from "../weatherSlice/weatherSlice";
 
@@ -9,6 +10,8 @@ import { WeatherDay } from "./model";
 import Summary from "./Summary";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const unit = useSelector(
     (state: { weather: weatherState }) => state.weather.unit
   );
@@ -33,6 +36,7 @@ const App = () => {
     if (unit === "℉") units = "imperial";
 
     const fetchData = async () => {
+      setIsLoading(true);
       const responseData = await axios.get(
         process.env.REACT_APP_WEATHER_BASE_URL || "",
         {
@@ -70,6 +74,8 @@ const App = () => {
       });
 
       setWeatherData(newData);
+
+      setIsLoading(false);
     };
 
     fetchData();
@@ -77,6 +83,7 @@ const App = () => {
 
   return (
     <MainLayout>
+      <Loading isOpen={isLoading} />
       <Summary data={weatherData[0]} />
       <Detail data={weatherData} />
     </MainLayout>

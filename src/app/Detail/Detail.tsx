@@ -43,7 +43,7 @@ const Detail: FC<Props> = (props: Props) => {
       </div>
       <div className={styles["weather-card"]}>
         {otherData.map((day, idx) => (
-          <WeatherCard day={day} key={idx} />
+          <WeatherCard weatherDay={day} key={idx} isTomorrow={idx === 0} />
         ))}
       </div>
 
