@@ -12,19 +12,24 @@ interface Props {
 
 const WeatherCard: FC<Props> = (props: Props) => {
   const { day } = props;
-  const unit = useSelector((state: any) => state.weather.unit);
+  const unit = useSelector(
+    (state: { weather: weatherState }) => state.weather.unit
+  );
+  const temps = day.temps.sort((a, b) => a - b);
+  const min_temp = temps[0];
+  const max_temp = temps[temps.length - 1];
 
   return (
     <div className={styles.card}>
       <p className={styles.date}>{day.date}</p>
-      {day.image}
+      <img alt="" src={day.icon} />
       <div className={styles["temp-info"]}>
         <p className={styles["temp-max"]}>
-          {day.max_temp}
+          {max_temp.toFixed(1)}
           <span>{unit}</span>
         </p>
         <p className={styles["temp-min"]}>
-          {day.min_temp}
+          {min_temp.toFixed(1)}
           <span>{unit}</span>
         </p>
       </div>

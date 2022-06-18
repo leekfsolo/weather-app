@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 import { ReactComponent as Navigate } from "../../common/ui/assets/images/navigate.svg";
 import { ReactComponent as Location } from "../../common/ui/assets/images/location.svg";
@@ -10,11 +10,23 @@ import Searching from "./Searching";
 import useGetCurrentPosition from "../../common/utils/helpers/useGetCurrentPosition";
 import { useSelector } from "react-redux";
 import { weatherState } from "../../weatherSlice/weatherSlice";
+import { WeatherDay } from "../model";
 
-const Summary = () => {
+interface Props {
+  data: WeatherDay;
+}
+
+const Summary: FC<Props> = (props: Props) => {
+  const { data } = props;
+  const { icon, temps, status, date } = data;
+  const temp = temps.reduce((tempA, tempB) => tempA + tempB, 0) / temps.length;
   const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
-  const unit = useSelector((state: any) => state.weather.unit);
-  const currentCity = useSelector((state: any) => state.weather.city);
+  const unit = useSelector(
+    (state: { weather: weatherState }) => state.weather.unit
+  );
+  const currentCity = useSelector(
+    (state: { weather: weatherState }) => state.weather.city
+  );
 
   // const pos = useGetCurrentPosition();
   // const getCurrentPos = () => console.log(pos);
@@ -29,16 +41,17 @@ const Summary = () => {
         <Navigate />
       </div>
       <div className={styles.content}>
-        <SunnyCloudRain />
+        <img alt="" src={icon} />
         <h1>
-          15<span>{unit}</span>
+          {temp.toFixed(1)}
+          <span>{unit}</span>
         </h1>
-        <h2>Shower</h2>
+        <h2>{status}</h2>
         <div className={styles.info}>
           <div className={styles.date}>
             <span>Today</span>
             <span>&bull;</span>
-            <span>Fri, 5 Jun</span>
+            <span>{date}</span>
           </div>
           <p>
             <Location />

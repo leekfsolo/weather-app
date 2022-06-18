@@ -25,15 +25,12 @@
       position: relative;
       top: 1px;
       cursor: pointer;
+      background-color: #585676;
+      color: colors.$gray;
 
-      &.celsius {
+      &.active {
         color: colors.$black;
         background-color: colors.$gray;
-      }
-
-      &.fahrenheit {
-        background-color: #585676;
-        color: colors.$gray;
       }
     }
   }

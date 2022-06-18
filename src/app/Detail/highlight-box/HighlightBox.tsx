@@ -24,7 +24,7 @@ const HighlightBox: FC<Props> = (props: Props) => {
     if (progressBarRef.current)
       progressBarRef.current.style.width =
         progressBarRef.current.getAttribute("aria-valuenow") + "%";
-  }, []);
+  }, [data.value]);
 
   return (
     <div className={styles.box}>
@@ -51,7 +51,7 @@ const HighlightBox: FC<Props> = (props: Props) => {
             <div
               className={styles.bar}
               role="progressbar"
-              aria-valuenow={84}
+              aria-valuenow={data.value}
               ref={progressBarRef}
             ></div>
           </div>
