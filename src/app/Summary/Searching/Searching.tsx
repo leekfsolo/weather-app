@@ -34,22 +34,19 @@ const Searching: FC<Props> = (props: Props) => {
     if (filteredValue !== "") {
       const fetchData = async () => {
         const locationData = await axios.get(
-          "https://countriesnow.space/api/v0.1/countries"
+          process.env.REACT_APP_CITY_BASE_URL || ""
         );
 
         const allCities: Array<string> = locationData.data.data
           .map((location: any) => location.cities)
           .flat();
-        const newCities: Array<string> = [];
+        let newCities: Array<string> = allCities.filter(
+          (city: string) => city.toLowerCase().indexOf(filteredValue) === 0
+        );
 
-        for (const city of allCities) {
-          if (city.toLowerCase().indexOf(filteredValue) === 0) {
-            newCities.push(city);
-            setCities(newCities);
+        if (newCities.length > 4) newCities = newCities.slice(0, 4);
 
-            if (newCities.length > 4) break;
-          }
-        }
+        setCities(newCities);
       };
 
       fetchData();

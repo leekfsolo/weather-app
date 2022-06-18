@@ -1,23 +1,18 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { AxiosResponse } from "axios";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../common/ui/layout/content-layout/loading";
 import MainLayout from "../common/ui/layout/main-layout";
-import { weatherState } from "../weatherSlice/weatherSlice";
+import { changeCity, weatherState } from "../weatherSlice/weatherSlice";
+import { doGetWeatherDataByCity } from "./api";
 
 import Detail from "./Detail";
 import { WeatherDay } from "./model";
 import Summary from "./Summary";
 
 const App = () => {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const unit = useSelector(
-    (state: { weather: weatherState }) => state.weather.unit
-  );
-  const city = useSelector(
-    (state: { weather: weatherState }) => state.weather.city
-  );
   const [weatherData, setWeatherData] = useState<Array<WeatherDay>>([
     {
       date: "",
@@ -31,22 +26,16 @@ const App = () => {
     },
   ]);
 
-  useEffect(() => {
-    let units = "metric";
-    if (unit === "℉") units = "imperial";
+  const unit = useSelector(
+    (state: { weather: weatherState }) => state.weather.unit
+  );
+  const city = useSelector(
+    (state: { weather: weatherState }) => state.weather.city
+  );
 
-    const fetchData = async () => {
-      setIsLoading(true);
-      const responseData = await axios.get(
-        process.env.REACT_APP_WEATHER_BASE_URL || "",
-        {
-          params: {
-            appid: process.env.REACT_APP_MY_API_KEYS,
-            q: city,
-            units,
-          },
-        }
-      );
+  const manageWeatherData = useCallback(
+    (responseData: AxiosResponse) => {
+      dispatch(changeCity(responseData.data.city.name));
       const weatherList = responseData.data.list;
       const newData: Array<WeatherDay> = [];
       const dates: Array<string> = [];
@@ -58,7 +47,7 @@ const App = () => {
           dates.push(date);
           const weatherDayData: WeatherDay = {
             date,
-            icon: `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`,
+            icon: `${process.env.REACT_APP_WEATHER_IMAGE_URL}${item.weather[0].icon}@2x.png`,
             status: item.weather[0].main,
             wind: item.wind.speed,
             humidity: item.main.humidity,
@@ -74,17 +63,33 @@ const App = () => {
       });
 
       setWeatherData(newData);
+    },
+    [dispatch]
+  );
+
+  useEffect(() => {
+    let units = "metric";
+    if (unit === "℉") units = "imperial";
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      const responseData = await doGetWeatherDataByCity(city, units);
+      manageWeatherData(responseData);
 
       setIsLoading(false);
     };
 
     fetchData();
-  }, [unit, city]);
+  }, [unit, city, manageWeatherData]);
 
   return (
     <MainLayout>
       <Loading isOpen={isLoading} />
-      <Summary data={weatherData[0]} />
+      <Summary
+        data={weatherData[0]}
+        manageWeatherData={manageWeatherData}
+        setIsLoading={setIsLoading}
+      />
       <Detail data={weatherData} />
     </MainLayout>
   );

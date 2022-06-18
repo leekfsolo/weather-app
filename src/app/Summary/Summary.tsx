@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 
 import { ReactComponent as Navigate } from "../../common/ui/assets/images/navigate.svg";
 import { ReactComponent as Location } from "../../common/ui/assets/images/location.svg";
@@ -6,23 +6,28 @@ import Cloud from "../../common/ui/assets/images/weather-set/cloud.png";
 
 import styles from "./Summary.module.scss";
 import Searching from "./Searching";
-import useGetCurrentPosition from "../../common/utils/helpers/useGetCurrentPosition";
 import { useSelector } from "react-redux";
 import { weatherState } from "../../weatherSlice/weatherSlice";
-import { WeatherDay } from "../model";
+import { Coords, WeatherDay } from "../model";
 import { getDateFormat } from "../../common/utils/helpers/getDateFormat";
+import { AxiosResponse } from "axios";
+import { doGetWeatherDataByCoords } from "../api";
 
 interface Props {
   data: WeatherDay;
+  manageWeatherData: (responseData: AxiosResponse) => void;
+  setIsLoading: (isLoading: boolean) => void;
 }
 
 const Summary: FC<Props> = (props: Props) => {
-  const { data } = props;
+  const { data, setIsLoading, manageWeatherData } = props;
   const { icon, temps, status, date: dateStr } = data;
-  const temp = temps.reduce((tempA, tempB) => tempA + tempB, 0) / temps.length;
   const { day, date, month } = getDateFormat(dateStr);
+  const temp = temps.reduce((tempA, tempB) => tempA + tempB, 0) / temps.length;
 
-  const [isShowSearching, setIsShowSearching] = useState<Boolean>(false);
+  const [isShowSearching, setIsShowSearching] = useState<boolean>(false);
+  const [coords, setCoords] = useState<Coords>({ lon: -1, lat: -1 });
+
   const unit = useSelector(
     (state: { weather: weatherState }) => state.weather.unit
   );
@@ -30,8 +35,33 @@ const Summary: FC<Props> = (props: Props) => {
     (state: { weather: weatherState }) => state.weather.city
   );
 
-  // const pos = useGetCurrentPosition();
-  // const getCurrentPos = () => console.log(pos);
+  const getCurrentPos = () => {
+    navigator.geolocation.getCurrentPosition((pos: GeolocationPosition) => {
+      const currCoords: Coords = {
+        lon: pos.coords.longitude,
+        lat: pos.coords.latitude,
+      };
+
+      setCoords(currCoords);
+    });
+  };
+
+  useEffect(() => {
+    let units = "metric";
+    if (unit === "℉") units = "imperial";
+
+    if (coords.lat !== -1 && coords.lon !== -1) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        const responseData = await doGetWeatherDataByCoords(coords, units);
+        manageWeatherData(responseData);
+
+        setIsLoading(false);
+      };
+
+      fetchData();
+    }
+  }, [coords, unit, manageWeatherData, setIsLoading]);
 
   return (
     <div className={styles.summary}>
@@ -40,7 +70,7 @@ const Summary: FC<Props> = (props: Props) => {
         <button onClick={() => setIsShowSearching(true)}>
           Search for places
         </button>
-        <Navigate />
+        <Navigate onClick={getCurrentPos} />
       </div>
       <div className={styles.content}>
         <img alt="" src={icon} />

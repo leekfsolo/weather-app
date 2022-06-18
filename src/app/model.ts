@@ -8,3 +8,8 @@ export interface WeatherDay {
   pressure: number;
   temps: Array<number>;
 }
+
+export interface Coords {
+  lon: number;
+  lat: number;
+}

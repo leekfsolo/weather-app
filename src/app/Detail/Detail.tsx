@@ -62,7 +62,7 @@ const Detail: FC<Props> = (props: Props) => {
           />
           <HighlightBox
             title="Visibility"
-            data={{ unit: "miles", value: visibility }}
+            data={{ unit: "m", value: visibility }}
           />
           <HighlightBox
             title="Air Pressure"
