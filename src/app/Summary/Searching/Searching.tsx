@@ -5,9 +5,9 @@ import { ReactComponent as Search } from "../../../common/ui/assets/images/searc
 import { ReactComponent as ChevronRight } from "../../../common/ui/assets/images/chevron-right.svg";
 
 import styles from "./Searching.module.scss";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { changeCity } from "../../../weatherSlice/weatherSlice";
+import { doGetCities } from "../../api";
 
 interface Props {
   setIsShowSearching: (isShowSearching: boolean) => void;
@@ -34,9 +34,7 @@ const Searching: FC<Props> = (props: Props) => {
     if (filteredValue !== "") {
       const MAX_NUMBER_CITIES_SHOWED = 4;
       const fetchData = async () => {
-        const locationData = await axios.get(
-          process.env.REACT_APP_CITY_BASE_URL || ""
-        );
+        const locationData = await doGetCities();
 
         const allCities: Array<string> = locationData.data.data
           .map((location: any) => location.cities)
