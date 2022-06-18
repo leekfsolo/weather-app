@@ -37,7 +37,7 @@ const App = () => {
     (responseData: AxiosResponse) => {
       if (responseData.data.city)
         dispatch(changeCity(responseData.data.city.name));
-      console.log(responseData);
+
       const weatherList = responseData.data.list;
       const newData: Array<WeatherDay> = [];
       const dates: Array<string> = [];
