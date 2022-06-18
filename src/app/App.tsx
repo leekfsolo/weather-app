@@ -35,7 +35,11 @@ const App = () => {
 
   const manageWeatherData = useCallback(
     (responseData: AxiosResponse) => {
+<<<<<<< HEAD
       if (responseData.data.city)
+=======
+      if (responseData.data.city.name)
+>>>>>>> fa9865dee778034659e143b7612220b2b6ec2e84
         dispatch(changeCity(responseData.data.city.name));
       const weatherList = responseData.data.list;
       const newData: Array<WeatherDay> = [];
