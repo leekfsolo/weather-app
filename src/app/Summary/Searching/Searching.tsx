@@ -32,6 +32,7 @@ const Searching: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (filteredValue !== "") {
+      const MAX_NUMBER_CITIES_SHOWED = 4;
       const fetchData = async () => {
         const locationData = await axios.get(
           process.env.REACT_APP_CITY_BASE_URL || ""
@@ -40,11 +41,11 @@ const Searching: FC<Props> = (props: Props) => {
         const allCities: Array<string> = locationData.data.data
           .map((location: any) => location.cities)
           .flat();
-        let newCities: Array<string> = allCities.filter(
-          (city: string) => city.toLowerCase().indexOf(filteredValue) === 0
-        );
-
-        if (newCities.length > 4) newCities = newCities.slice(0, 4);
+        const newCities: Array<string> = allCities
+          .filter(
+            (city: string) => city.toLowerCase().indexOf(filteredValue) === 0
+          )
+          .slice(0, MAX_NUMBER_CITIES_SHOWED);
 
         setCities(newCities);
       };
