@@ -65,7 +65,21 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 992px) {
+  .box {
+    min-width: 200px;
+    padding: 22px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .box {
+    min-width: 150px;
+    padding: 22px 30px;
+  }
+}
+
+@media (max-width: 577px) {
   .box {
     min-width: auto;
     padding: 22px 30px;

@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import Loading from "../content-layout/loading";
+import Loading from "../../components/loading";
 
 import styles from "./MainLayout.module.scss";
 

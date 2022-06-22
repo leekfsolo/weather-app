@@ -1,10 +1,10 @@
 .main-layout {
   display: grid;
-  grid-template-columns: 450px auto;
+  grid-template-columns: 1fr 2fr;
   height: 100%;
 }
 
-@media (max-width: 376px) {
+@media (max-width: 577px) {
   .main-layout {
     display: flex;
     flex-direction: column;

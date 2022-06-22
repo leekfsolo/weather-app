@@ -26,7 +26,7 @@ const Detail: FC<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   return (
-    <section className={`${styles.detail} h-100`}>
+    <section className={`${styles.detail} h-100 m-xs-4 p-4 p-xl-5`}>
       <div
         className={`${styles.temperature} d-flex justify-content-end align-items-center gap-2 mb-5`}
       >
@@ -43,7 +43,7 @@ const Detail: FC<Props> = (props: Props) => {
           ℉
         </p>
       </div>
-      <div className="d-flex flex-wrap justify-content-between align-items-center mb-5">
+      <div className="d-flex flex-wrap justify-content-lg-between justify-content-center align-items-center mb-5 gap-sm-4 gap-3 p-4 p-sm-0">
         {otherData.map((day, idx) => (
           <WeatherCard weatherDay={day} key={idx} isTomorrow={idx === 0} />
         ))}

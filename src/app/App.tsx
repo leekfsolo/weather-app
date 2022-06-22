@@ -1,7 +1,6 @@
 import { AxiosResponse } from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "../common/ui/layout/content-layout/loading";
 import MainLayout from "../common/ui/layout/main-layout";
 import { changeCity, weatherState } from "../weatherSlice/weatherSlice";
 import { doGetWeatherDataByCity } from "./api";

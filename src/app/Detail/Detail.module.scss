@@ -2,7 +2,6 @@
 
 .detail {
   background-color: colors.$secondary;
-  padding: 40px 125px 25px;
   height: 100%;
 
   .temperature {
@@ -44,7 +43,7 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 577px) {
   .detail {
     padding: 24px;
 

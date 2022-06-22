@@ -60,7 +60,11 @@ const Searching: FC<Props> = (props: Props) => {
         <Close />
       </div>
       <div className={styles.searchBar}>
-        <form action="#" onSubmit={searchLocationHandler}>
+        <form
+          action="#"
+          onSubmit={searchLocationHandler}
+          className="d-flex justify-content-between w-100 h-100 position-relative flex-column flex-md-row gap-2 align-items-center"
+        >
           <input
             type="text"
             placeholder="search location"

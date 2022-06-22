@@ -10,7 +10,6 @@
       background-color: colors.$bg-gray;
       color: colors.$gray;
       font-weight: 500;
-      font-size: 16px;
       outline: 0;
       border: 0;
       cursor-pointer &:active {
@@ -31,11 +30,14 @@
   .content {
     gap: 60px 0;
 
+    img {
+      width: 200px;
+    }
+
     h1 {
       color: colors.$gray;
       font-size: 72px;
       font-weight: 500;
-      margin: 0;
 
       span {
         color: colors.$title-gray;
@@ -99,7 +101,47 @@
   }
 }
 
-@media (max-width: 376px) {
+@media (max-width: 992px) {
+  .summary {
+    padding: 30px;
+
+    .headings {
+      button {
+        padding: 8px 12px;
+      }
+    }
+    .content {
+      gap: 48px;
+
+      h1 {
+        font-size: 36px;
+      }
+
+      img {
+        width: 150px;
+      }
+
+      .info {
+        span {
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .decoration {
+      &.decoration-1,
+      &.decoration-2 {
+        left: -30%;
+      }
+    }
+  }
+}
+
+@media (max-width: 577px) {
   .summary {
     padding: 18px 11px;
 
