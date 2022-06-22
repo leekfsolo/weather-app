@@ -6,6 +6,7 @@
 
   .headings {
     button {
+      font-size: 14px;
       padding: 10px 18px;
       background-color: colors.$bg-gray;
       color: colors.$gray;
@@ -141,18 +142,35 @@
   }
 }
 
+@media (max-width: 768px) {
+  .summary {
+    padding: 20px 8px;
+
+    .headings {
+      button {
+        font-size: 12px;
+      }
+    }
+    .content {
+    }
+  }
+}
+
 @media (max-width: 577px) {
   .summary {
-    padding: 18px 11px;
+    padding: 30px;
 
-    .content {
-      gap: 50px 0;
+    .headings {
+      button {
+        font-size: 16px;
+        padding: 10px 15px;
+      }
     }
 
     .decoration {
       &.decoration-1,
       &.decoration-2 {
-        left: -25%;
+        left: -15%;
       }
     }
   }

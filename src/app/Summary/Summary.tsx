@@ -70,9 +70,9 @@ const Summary: FC<Props> = (props: Props) => {
     >
       {isShowSearching && <Searching setIsShowSearching={setIsShowSearching} />}
       <div
-        className={`${styles.headings} d-flex flex-column flex-lg-row align-items-center justify-content-center justify-content-lg-between mb-0 gap-2`}
+        className={`${styles.headings} d-flex align-items-center justify-content-between mb-0 gap-2`}
       >
-        <button onClick={() => setIsShowSearching(true)} className="fs-6">
+        <button onClick={() => setIsShowSearching(true)}>
           Search for places
         </button>
         <Navigate onClick={getCurrentPos} />
