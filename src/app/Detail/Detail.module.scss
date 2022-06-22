@@ -6,12 +6,6 @@
   height: 100%;
 
   .temperature {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0 12px;
-    margin-bottom: 40px;
-
     p {
       border-radius: 50%;
       width: 30px;
@@ -33,14 +27,6 @@
         background-color: colors.$gray;
       }
     }
-  }
-
-  .weather-card {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
   }
 
   .weather-highlights {

@@ -26,22 +26,24 @@ const Detail: FC<Props> = (props: Props) => {
   const dispatch = useDispatch();
 
   return (
-    <section className={styles.detail}>
-      <div className={styles.temperature}>
+    <section className={`${styles.detail} h-100`}>
+      <div
+        className={`${styles.temperature} d-flex justify-content-end align-items-center gap-2 mb-5`}
+      >
         <p
-          className={isCelsius ? styles.active : undefined}
+          className={isCelsius && styles.active}
           onClick={() => dispatch(celsius())}
         >
           ℃
         </p>
         <p
-          className={!isCelsius ? styles.active : undefined}
+          className={!isCelsius && styles.active}
           onClick={() => dispatch(fahrenheit())}
         >
           ℉
         </p>
       </div>
-      <div className={styles["weather-card"]}>
+      <div className="d-flex flex-wrap justify-content-between align-items-center mb-5">
         {otherData.map((day, idx) => (
           <WeatherCard weatherDay={day} key={idx} isTomorrow={idx === 0} />
         ))}

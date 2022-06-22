@@ -1,4 +1,5 @@
 import React, { FC, ReactNode } from "react";
+import { Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getDateFormat } from "../../../common/utils/helpers/getDateFormat";
 import { weatherState } from "../../../weatherSlice/weatherSlice";
@@ -25,13 +26,17 @@ const WeatherCard: FC<Props> = (props: Props) => {
   const max_temp = sortTemps[temps.length - 1];
 
   return (
-    <div className={styles.card}>
-      <p className={styles.date}>{`${
+    <div
+      className={`${styles.card} d-flex flex-column justify-content-center align-items-center`}
+    >
+      <p className="mb-2">{`${
         isTomorrow ? "Tomorrow" : `${day}, ${date} ${month}`
       }`}</p>
-      <img alt="" src={icon} />
-      <div className={styles["temp-info"]}>
-        <p className={styles["temp-max"]}>
+      <Image alt="" src={icon} fluid />
+      <div
+        className={`${styles["temp-info"]} d-flex justify-content-between align-items-center gap-3`}
+      >
+        <p>
           {max_temp.toFixed(1)}
           <span>{unit}</span>
         </p>

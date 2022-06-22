@@ -1,13 +1,22 @@
 import React, { FC, ReactNode } from "react";
+import Loading from "../content-layout/loading";
 
 import styles from "./MainLayout.module.scss";
 
 interface Props {
   children: ReactNode;
+  isOpen: boolean;
 }
 
 const MainLayout: FC<Props> = (props: Props) => {
-  return <div className={styles["main-layout"]}>{props.children}</div>;
+  const { children, isOpen } = props;
+
+  return (
+    <div className={styles["main-layout"]}>
+      <Loading isOpen={isOpen} />
+      {children}
+    </div>
+  );
 };
 
 export default MainLayout;

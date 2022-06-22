@@ -1,10 +1,6 @@
 @use "../../../common/ui/assets/colors";
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: colors.$primary;
   color: colors.$gray;
   min-height: 177px;
@@ -14,22 +10,9 @@
     margin: 0;
     font-weight: 500;
     font-size: 16px;
-
-    &.date {
-      margin-bottom: 10px;
-    }
-  }
-
-  img {
-    width: 100px;
   }
 
   .temp-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0 16px;
-
     p {
       &.temp-min {
         color: colors.$text-disabled;

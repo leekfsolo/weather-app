@@ -1,4 +1,4 @@
-import { doGet } from "../common/base/api";
+import { doGet } from "../common/utils/baseAPI";
 import { Coords } from "./model";
 
 export const doGetCities = () =>

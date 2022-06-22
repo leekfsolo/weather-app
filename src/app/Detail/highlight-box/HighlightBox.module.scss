@@ -1,10 +1,6 @@
 @use "../../../common/ui/assets/colors";
 
 .box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: colors.$primary;
   color: colors.$gray;
   min-width: 300px;
@@ -31,12 +27,6 @@
   }
 
   .extend {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0 5px;
-    margin-top: 15px;
-
     svg {
       display: inline-block;
       width: 28px;
@@ -48,15 +38,7 @@
   }
 
   .progress-bar {
-    width: 100%;
-    margin-top: 15px;
-
     .indicator {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 700;
       color: colors.$text-disabled;
     }
 
@@ -69,7 +51,7 @@
       margin: 5px 0;
 
       .bar {
-        width: 0px;
+        width: 0;
         height: 8px;
         border-radius: 80px;
         background-color: colors.$yellow;
@@ -78,10 +60,6 @@
     }
 
     .unit {
-      display: flex;
-      justify-content: flex-end;
-      font-weight: 700;
-      font-size: 12px;
       color: colors.$text-disabled;
     }
   }

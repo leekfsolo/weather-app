@@ -85,8 +85,7 @@ const App = () => {
   }, [unit, city, manageWeatherData]);
 
   return (
-    <MainLayout>
-      <Loading isOpen={isLoading} />
+    <MainLayout isOpen={isLoading}>
       <Summary
         data={weatherData[0]}
         manageWeatherData={manageWeatherData}

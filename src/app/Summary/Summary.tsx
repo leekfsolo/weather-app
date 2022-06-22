@@ -12,6 +12,7 @@ import { Coords, WeatherDay } from "../model";
 import { getDateFormat } from "../../common/utils/helpers/getDateFormat";
 import { AxiosResponse } from "axios";
 import { doGetWeatherDataByCoords } from "../api";
+import { Image } from "react-bootstrap";
 
 interface Props {
   data: WeatherDay;
@@ -64,28 +65,34 @@ const Summary: FC<Props> = (props: Props) => {
   }, [coords, unit, manageWeatherData, setIsLoading]);
 
   return (
-    <div className={styles.summary}>
+    <div
+      className={`${styles.summary} position-relative h-100 overflow-hidden`}
+    >
       {isShowSearching && <Searching setIsShowSearching={setIsShowSearching} />}
-      <div className={styles.headings}>
+      <div
+        className={`${styles.headings} d-flex align-items-center justify-content-between mb-0`}
+      >
         <button onClick={() => setIsShowSearching(true)}>
           Search for places
         </button>
         <Navigate onClick={getCurrentPos} />
       </div>
-      <div className={styles.content}>
-        <img alt="" src={icon} />
+      <div
+        className={`${styles.content} d-flex flex-column align-items-center justify-content-center`}
+      >
+        <Image alt="" src={icon} fluid />
         <h1>
           {temp.toFixed(1)}
           <span>{unit}</span>
         </h1>
         <h2>{status}</h2>
         <div className={styles.info}>
-          <div className={styles.date}>
+          <div className="d-flex flex-column align-items-center justify-content-between gap-3 fw-bold mb-4">
             <span>Today</span>
             <span>&bull;</span>
             <span>{`${day}, ${date} ${month}`}</span>
           </div>
-          <p>
+          <p className="d-flex align-items-center justify-content-center gap-1">
             <Location />
             {currentCity}
           </p>
