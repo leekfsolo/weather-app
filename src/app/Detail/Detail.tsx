@@ -10,6 +10,7 @@ import {
   fahrenheit,
   weatherState,
 } from "../../weatherSlice/weatherSlice";
+import { Col, Container, Row } from "react-bootstrap";
 
 interface Props {
   data: Array<WeatherDay>;
@@ -51,26 +52,38 @@ const Detail: FC<Props> = (props: Props) => {
 
       <div className={styles["weather-highlights"]}>
         <h3>Today's Highlights</h3>
-        <div className={styles.highlights}>
-          <HighlightBox
-            title="Wind status"
-            data={{ unit: "mph", value: wind }}
-            extend
-          />
-          <HighlightBox
-            title="Humidity"
-            data={{ unit: "%", value: humidity }}
-            progressBar
-          />
-          <HighlightBox
-            title="Visibility"
-            data={{ unit: "m", value: visibility }}
-          />
-          <HighlightBox
-            title="Air Pressure"
-            data={{ unit: "mb", value: pressure }}
-          />
-        </div>
+        <Container className="d-grid gap-4 p-0" fluid>
+          <Row>
+            <Col className="mb-4 mb-sm-0" sm={6}>
+              <HighlightBox
+                title="Wind status"
+                data={{ unit: "mph", value: wind }}
+                extend
+              />
+            </Col>
+            <Col sm={6}>
+              <HighlightBox
+                title="Humidity"
+                data={{ unit: "%", value: humidity }}
+                progressBar
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={6} className="mb-4 mb-sm-0">
+              <HighlightBox
+                title="Visibility"
+                data={{ unit: "m", value: visibility }}
+              />
+            </Col>
+            <Col sm={6}>
+              <HighlightBox
+                title="Air Pressure"
+                data={{ unit: "mb", value: pressure }}
+              />
+            </Col>
+          </Row>
+        </Container>
       </div>
     </section>
   );

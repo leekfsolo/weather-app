@@ -29,16 +29,12 @@
   }
 
   .weather-highlights {
+    margin-bottom: 50px;
+
     h3 {
       font-size: 24px;
       font-weight: 700;
       color: colors.$gray;
-    }
-
-    .highlights {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
     }
   }
 }

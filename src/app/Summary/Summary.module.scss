@@ -6,7 +6,7 @@
 
   .headings {
     button {
-      font-size: 14px;
+      font-size: 16px;
       padding: 10px 18px;
       background-color: colors.$bg-gray;
       color: colors.$gray;
@@ -144,14 +144,16 @@
 
 @media (max-width: 768px) {
   .summary {
-    padding: 20px 8px;
+    padding: 20px;
 
     .headings {
       button {
         font-size: 12px;
       }
     }
+
     .content {
+      gap: 70px;
     }
   }
 }

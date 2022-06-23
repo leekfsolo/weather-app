@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import React, { useCallback, useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import MainLayout from "../common/ui/layout/main-layout";
 import { changeCity, weatherState } from "../weatherSlice/weatherSlice";
@@ -85,12 +86,18 @@ const App = () => {
 
   return (
     <MainLayout isOpen={isLoading}>
-      <Summary
-        data={weatherData[0]}
-        manageWeatherData={manageWeatherData}
-        setIsLoading={setIsLoading}
-      />
-      <Detail data={weatherData} />
+      <Row className="h-100 min-vh-100">
+        <Col sm={4} className="p-0">
+          <Summary
+            data={weatherData[0]}
+            manageWeatherData={manageWeatherData}
+            setIsLoading={setIsLoading}
+          />
+        </Col>
+        <Col sm={8} className="p-0">
+          <Detail data={weatherData} />
+        </Col>
+      </Row>
     </MainLayout>
   );
 };

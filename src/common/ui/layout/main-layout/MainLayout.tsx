@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from "react";
+import { Container } from "react-bootstrap";
 import Loading from "../../components/loading";
-
-import styles from "./MainLayout.module.scss";
 
 interface Props {
   children: ReactNode;
@@ -12,10 +11,10 @@ const MainLayout: FC<Props> = (props: Props) => {
   const { children, isOpen } = props;
 
   return (
-    <div className={styles["main-layout"]}>
+    <Container className="h-100 min-vh-100 m-0" fluid>
       <Loading isOpen={isOpen} />
       {children}
-    </div>
+    </Container>
   );
 };
 
